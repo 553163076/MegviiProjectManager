@@ -1,87 +1,96 @@
 package com.ruoyi.project.hissys.service.impl;
 
-import com.ruoyi.common.constant.UserConstants;
-import com.ruoyi.project.hissys.domain.HisSysDept;
-import com.ruoyi.project.hissys.mapper.HisSysDeptMapper;
-import com.ruoyi.project.hissys.service.IHisSysDeptService;
+import java.util.List;
+import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.ruoyi.project.hissys.mapper.HisSysDeptMapper;
+import com.ruoyi.project.hissys.domain.HisSysDept;
+import com.ruoyi.project.hissys.service.IHisSysDeptService;
 
 /**
- * 科室管理服务
+ * 科室Service业务层处理
+ * 
+ * @author ruoyi
+ * @date 2022-02-18
  */
 @Service
-public class HisSysDeptServiceImpl implements IHisSysDeptService {
+public class HisSysDeptServiceImpl implements IHisSysDeptService 
+{
     @Autowired
-    private HisSysDeptMapper deptMapper;
+    private HisSysDeptMapper hisSysDeptMapper;
 
     /**
-     * 删除科室
-     * @param deptIds
-     * @return
+     * 查询科室
+     * 
+     * @param deptId 科室ID
+     * @return 科室
      */
     @Override
-    public int deleteDeptByIds(Long[] deptIds) {
-        // 考虑科室中是否有医生。员工。
-        // 缺少用户管理功能，暂时直接删除。
-
-        return deptMapper.deleteDeptByIds(deptIds);
+    public HisSysDept selectHisSysDeptById(Long deptId)
+    {
+        return hisSysDeptMapper.selectHisSysDeptById(deptId);
     }
 
     /**
-     * 查询科室名称是否在表格中存在。
-     * @param dept
-     * @return
+     * 查询科室列表
+     * 
+     * @param hisSysDept 科室
+     * @return 科室
      */
     @Override
-    public String checkDeptNameUnique(HisSysDept dept) {
-        HisSysDept info = deptMapper.selectDeptByDeptName(dept.getDeptName());
-        if(info != null){
-            // 有数据
-            return UserConstants.NOT_UNIQUE;
-        }
-        return UserConstants.UNIQUE;
-    }
-
-    /**
-     * 更新科室
-     * @param dept
-     * @return
-     */
-    @Override
-    public int updateDept(HisSysDept dept) {
-        return deptMapper.updateDept(dept);
-    }
-
-    /**
-     * 根据科室主键查询详情
-     * @param deptId
-     * @return
-     */
-    @Override
-    public HisSysDept selectDeptById(Long deptId) {
-        return deptMapper.selectDeptByDeptId(deptId);
+    public List<HisSysDept> selectHisSysDeptList(HisSysDept hisSysDept)
+    {
+        return hisSysDeptMapper.selectHisSysDeptList(hisSysDept);
     }
 
     /**
      * 新增科室
-     * @param dept
-     * @return
+     * 
+     * @param hisSysDept 科室
+     * @return 结果
      */
     @Override
-    public int insertDept(HisSysDept dept) {
-        return deptMapper.insertDept(dept);
+    public int insertHisSysDept(HisSysDept hisSysDept)
+    {
+        hisSysDept.setCreateTime(DateUtils.getNowDate());
+        return hisSysDeptMapper.insertHisSysDept(hisSysDept);
     }
 
     /**
-     * 分页查询科室
-     * @param dept
-     * @return
+     * 修改科室
+     * 
+     * @param hisSysDept 科室
+     * @return 结果
      */
     @Override
-    public List<HisSysDept> selectDeptList(HisSysDept dept) {
-        return deptMapper.selectDeptList(dept);
+    public int updateHisSysDept(HisSysDept hisSysDept)
+    {
+        hisSysDept.setUpdateTime(DateUtils.getNowDate());
+        return hisSysDeptMapper.updateHisSysDept(hisSysDept);
+    }
+
+    /**
+     * 批量删除科室
+     * 
+     * @param deptIds 需要删除的科室ID
+     * @return 结果
+     */
+    @Override
+    public int deleteHisSysDeptByIds(Long[] deptIds)
+    {
+        return hisSysDeptMapper.deleteHisSysDeptByIds(deptIds);
+    }
+
+    /**
+     * 删除科室信息
+     * 
+     * @param deptId 科室ID
+     * @return 结果
+     */
+    @Override
+    public int deleteHisSysDeptById(Long deptId)
+    {
+        return hisSysDeptMapper.deleteHisSysDeptById(deptId);
     }
 }

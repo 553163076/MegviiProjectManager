@@ -1,131 +1,126 @@
 package com.ruoyi.project.hissys.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
-import javax.validation.constraints.NotBlank;
-import java.util.Objects;
-
 /**
- * @author 老金
- * @since 1.0
- * @date 2021-04-27
- * 尚医疗 - 系统管理 - 科室实体类型
+ * 科室对象 his_sys_dept
+ * 
+ * @author ruoyi
+ * @date 2022-02-18
  */
-public class HisSysDept extends BaseEntity {
-    // 定义属性
-    @Excel(name = "科室序号", cellType = Excel.ColumnType.NUMERIC)
+public class HisSysDept extends BaseEntity
+{
+    private static final long serialVersionUID = 1L;
+
+    /** 科室ID */
     private Long deptId;
-    @NotBlank(message = "科室名称必须填写")
+
+    /** 科室名称 */
     @Excel(name = "科室名称")
     private String deptName;
-    @Excel(name = "科室编号")
+
+    /** 科室编码 */
+    @Excel(name = "科室编码")
     private String deptCode;
-    @Excel(name = "挂号量", cellType = Excel.ColumnType.NUMERIC)
-    private long no;
+
+    /** 当前挂号量 */
+    @Excel(name = "当前挂号量")
+    private Long deptNum;
+
+    /** 负责人 */
     @Excel(name = "负责人")
-    private String deptCharge;
-    @Excel(name = "联系电话")
-    private String phone;
+    private String deptLeader;
+
+    /** 手机号码 */
+    @Excel(name = "手机号码")
+    private String deptPhone;
+
+    /** 状态（0正常 1停用） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
-    @Excel(name = "排序编号", cellType = Excel.ColumnType.NUMERIC)
-    private int orderNum;
 
-    public int getOrderNum() {
-        return orderNum;
+    public void setDeptId(Long deptId) 
+    {
+        this.deptId = deptId;
     }
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
+    public Long getDeptId() 
+    {
+        return deptId;
+    }
+    public void setDeptName(String deptName) 
+    {
+        this.deptName = deptName;
+    }
+
+    public String getDeptName() 
+    {
+        return deptName;
+    }
+    public void setDeptCode(String deptCode) 
+    {
+        this.deptCode = deptCode;
+    }
+
+    public String getDeptCode() 
+    {
+        return deptCode;
+    }
+    public void setDeptNum(Long deptNum) 
+    {
+        this.deptNum = deptNum;
+    }
+
+    public Long getDeptNum() 
+    {
+        return deptNum;
+    }
+    public void setDeptLeader(String deptLeader) 
+    {
+        this.deptLeader = deptLeader;
+    }
+
+    public String getDeptLeader() 
+    {
+        return deptLeader;
+    }
+    public void setDeptPhone(String deptPhone) 
+    {
+        this.deptPhone = deptPhone;
+    }
+
+    public String getDeptPhone() 
+    {
+        return deptPhone;
+    }
+    public void setStatus(String status) 
+    {
+        this.status = status;
+    }
+
+    public String getStatus() 
+    {
+        return status;
     }
 
     @Override
     public String toString() {
-        return "HisSysDept{" +
-                "deptId=" + deptId +
-                ", deptName='" + deptName + '\'' +
-                ", deptCode='" + deptCode + '\'' +
-                ", no=" + no +
-                ", deptCharge='" + deptCharge + '\'' +
-                ", phone='" + phone + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        HisSysDept that = (HisSysDept) o;
-        return no == that.no &&
-                orderNum == that.orderNum &&
-                Objects.equals(deptId, that.deptId) &&
-                Objects.equals(deptName, that.deptName) &&
-                Objects.equals(deptCode, that.deptCode) &&
-                Objects.equals(deptCharge, that.deptCharge) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(status, that.status);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(deptId, deptName, deptCode, no, deptCharge, phone, status, orderNum);
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public String getDeptCode() {
-        return deptCode;
-    }
-
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
-    }
-
-    public long getNo() {
-        return no;
-    }
-
-    public void setNo(long no) {
-        this.no = no;
-    }
-
-    public String getDeptCharge() {
-        return deptCharge;
-    }
-
-    public void setDeptCharge(String deptCharge) {
-        this.deptCharge = deptCharge;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("deptId", getDeptId())
+            .append("deptName", getDeptName())
+            .append("deptCode", getDeptCode())
+            .append("deptNum", getDeptNum())
+            .append("deptLeader", getDeptLeader())
+            .append("deptPhone", getDeptPhone())
+            .append("status", getStatus())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
     }
 }
