@@ -1,50 +1,61 @@
 package com.ruoyi.project.hissys.mapper;
 
-import com.ruoyi.project.hissys.domain.HisSysDept;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import com.ruoyi.project.hissys.domain.HisSysDept;
 
-public interface HisSysDeptMapper {
+/**
+ * 科室Mapper接口
+ * 
+ * @author ruoyi
+ * @date 2022-02-18
+ */
+public interface HisSysDeptMapper 
+{
     /**
-     * 分页查询科室
-     * @param dept
-     * @return
+     * 查询科室
+     * 
+     * @param deptId 科室ID
+     * @return 科室
      */
-    List<HisSysDept> selectDeptList(HisSysDept dept);
+    public HisSysDept selectHisSysDeptById(Long deptId);
+
+    /**
+     * 查询科室列表
+     * 
+     * @param hisSysDept 科室
+     * @return 科室集合
+     */
+    public List<HisSysDept> selectHisSysDeptList(HisSysDept hisSysDept);
 
     /**
      * 新增科室
-     * @param dept
-     * @return
+     * 
+     * @param hisSysDept 科室
+     * @return 结果
      */
-    int insertDept(HisSysDept dept);
+    public int insertHisSysDept(HisSysDept hisSysDept);
 
     /**
-     * 主键查询科室
-     * @param deptId
-     * @return
+     * 修改科室
+     * 
+     * @param hisSysDept 科室
+     * @return 结果
      */
-    HisSysDept selectDeptByDeptId(Long deptId);
+    public int updateHisSysDept(HisSysDept hisSysDept);
 
     /**
-     * 更新科室
-     * @param dept
-     * @return
+     * 删除科室
+     * 
+     * @param deptId 科室ID
+     * @return 结果
      */
-    int updateDept(HisSysDept dept);
-
-    /**
-     * 根据科室名称查询科室数据
-     * @param deptName
-     * @return
-     */
-    HisSysDept selectDeptByDeptName(String deptName);
+    public int deleteHisSysDeptById(Long deptId);
 
     /**
      * 批量删除科室
-     * @param deptIds
-     * @return
+     * 
+     * @param deptIds 需要删除的数据ID
+     * @return 结果
      */
-    int deleteDeptByIds(@Param("deptIds") Long[] deptIds);
+    public int deleteHisSysDeptByIds(Long[] deptIds);
 }
